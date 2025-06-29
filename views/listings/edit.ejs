@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+
+  <body>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <br />
+        <br />
+        <h2>Edit Listing</h2>
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate
+          enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input name="listing[title]" value="<%=listing.title %>" type="text" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea name="listing[description]" class="form-control" required>
+          <%= listing.description %> </textarea>
+          </div>
+
+          <div class="mb-3">
+            Original Listing Image:<br /><br />
+            <img class="og_img" src="<%= originalImageURL %>">
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label">Upload New Image</label>
+            <input name="listing[image]" type="file" class="form-control" />
+          </div>
+
+
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select name="listing[category]" class="form-control" required>
+              <option value="">Select a category</option>
+              <% const categories=["trending", "rooms" , "iconic-cities" , "mountains" , "castles" , "amazing-pools"
+                , "camping" , "farms" , "arctic-pools" ]; %>
+                <% for(let cat of categories) { %>
+                  <option value="<%= cat %>" <%=listing.category===cat ? "selected" : "" %>>
+                    <%= cat.replace("-", " " ).replace(/\b\w/g, l=> l.toUpperCase()) %>
+                  </option>
+                  <% } %>
+            </select>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="price" class="form-label">Price:</label>
+              <input name="listing[price]" value="<%=listing.price %>" type="number" class="form-control" required />
+            </div>
+            <div class="mb-3 col-md-8">
+              <label for="country" class="form-label">Country:</label>
+              <input name="listing[country]" value="<%=listing.country %>" type="text" class="form-control" required />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input name="listing[location]" value="<%=listing.location %>" type="text" class="form-control" required />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+
+          <button class="btn btn-dark edit-btn mt-3">Edit</button>
+          <br />
+          <br />
+        </form>
+      </div>
+    </div>
+  </body>
