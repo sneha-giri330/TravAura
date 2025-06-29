@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const ExpressError = require("./utils/ExpressError");
+// const ExpressError = require("./utils/ExpressError");
 const session = require ("express-session");
 const MongoStore = require('connect-mongo');
 
@@ -70,11 +70,6 @@ const sessionOptions ={
 };
 
 
-// // Root
-// app.get("/", (req, res) => {
-//   res.send("Successfully loaded on root home page");
-// });
-
 //Session and flash
 app.use(session(sessionOptions));
 app.use(flash());//must used before routes
@@ -91,19 +86,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//-----------Routes-----------
-
-// app.get("/demouser", async(req,res)=>{
-//   let fakeUser =new User({
-//     email: "test@gmail.com",
-//     username: "testuser",
-//   });
-  
-//   let registeredUser = await User.register( fakeUser, "helloworld");
-
-//   res.send(registeredUser);
-
-// });
 
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
@@ -111,6 +93,13 @@ app.use((req,res,next)=>{
   res.locals.currentUser= req.user; // defined locals req.user since req.user cannot be directly accessed in navbar.ejs
   next();
 });
+
+
+// // Root
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 
 //LISTING ROUTE
 app.use("/listings", listingRouter);
