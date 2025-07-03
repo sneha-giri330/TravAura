@@ -17,11 +17,12 @@ module.exports.showListing = async (req, res) => {
     const listing = await Listing.findById(id)
       .populate({ path: "reviews", populate: { path: "author" } })
       .populate("owner");
-    // Replace 'reviews' and 'owner' ObjectIds with actual info from their collections ex- not obj id-123456 but ratings=5 and comment =something
-    if (!listing) {
-      req.flash("error", "Listing you requested for does not exist!");
-      return res.redirect("/listings");
-    }
+      // Replace 'reviews' and 'owner' ObjectIds with actual info from their collections ex- not obj id-123456 but ratings=5 and comment =something
+      if (!listing) {
+        req.flash("error", "Listing you requested for does not exist!");
+        return res.redirect("/listings");
+      }
+     
     res.render("listings/show.ejs", { listing });
 }
 
