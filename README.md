@@ -43,7 +43,7 @@ touch .env
 And add the following line (replace with your actual MongoDB Atlas URI):
 
 
-ATLASDB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/wanderlust?retryWrites=true&w=majority
+ATLASDB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/travaura?retryWrites=true&w=majority
 
 
 ---
