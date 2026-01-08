@@ -64,6 +64,8 @@ http://localhost:8080/listings
 
 ## 👤 Default User for Testing
 
+ https://travaura.onrender.com/listings
+
 - **Username**: `testuser`
 - **Password**: `hello`
 
